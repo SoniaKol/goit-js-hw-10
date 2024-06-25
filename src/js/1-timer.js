@@ -22,7 +22,7 @@ flatpickr('#datetime-picker', options);
 
 const elements = {
   button: document.querySelector('button[data-start]'),
-  input: document.querySelector('.flatpickr-mobile'),
+  input: document.querySelector('.flatpickr-input.flatpickr-mobile'),
   days: document.querySelector('.value[data-days]'),
   hours: document.querySelector('.value[data-hours]'),
   minutes: document.querySelector('.value[data-minutes]'),
@@ -31,7 +31,7 @@ const elements = {
 
 disabledBtn(elements.button);
 elements.button.addEventListener('click', clickHandler);
-
+console.log(elements.input);
 function clickHandler() {
   let value = checkDate(userSelectedDate);
   let dateObj = convertMs(value);
