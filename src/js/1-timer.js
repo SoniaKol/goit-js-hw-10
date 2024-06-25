@@ -40,7 +40,7 @@ function clickHandler() {
 
 function startTimmer(obj, number) {
   disabledBtn(elements.button);
-  elements.input.setAttribute('disabled', 'true');
+  disabledInput(elements.input);
 
   let { days, hours, minutes, seconds } = obj;
 
@@ -114,4 +114,8 @@ function abledBtn(btn) {
   btn.removeAttribute('disabled');
   btn.style.backgroundColor = '#4e75ff';
   btn.style.color = '#fff';
+}
+
+function disabledInput(input) {
+  input.setAttribute('disabled', '');
 }
