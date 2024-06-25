@@ -117,5 +117,5 @@ function abledBtn(btn) {
 }
 
 function disabledInput(input) {
-  input.setAttribute('disabled', '');
+  input.disabled = 'true';
 }
