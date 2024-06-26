@@ -22,7 +22,7 @@ flatpickr('#datetime-picker', options);
 
 const elements = {
   button: document.querySelector('button[data-start]'),
-  input: document.querySelector('.flatpickr-input.flatpickr-mobile'),
+  input: document.querySelector('#datetime-picker'),
   days: document.querySelector('.value[data-days]'),
   hours: document.querySelector('.value[data-hours]'),
   minutes: document.querySelector('.value[data-minutes]'),
@@ -31,7 +31,7 @@ const elements = {
 
 disabledBtn(elements.button);
 elements.button.addEventListener('click', clickHandler);
-console.log(elements.input);
+
 function clickHandler() {
   let value = checkDate(userSelectedDate);
   let dateObj = convertMs(value);
@@ -58,14 +58,14 @@ function startTimmer(obj, number) {
       elements.input.removeAttribute('disabled');
     }
 
-    if (seconds < 0 && minutes > 0) {
+    if (seconds < 0 && minutes >= 0) {
       seconds = 59;
       minutes -= 1;
-      if (minutes < 0 && hours > 0) {
+      if (minutes < 0 && hours >= 0) {
         minutes = 59;
         hours -= 1;
-        if (hours > 0 && days > 0) {
-          days = -1;
+        if (hours < 0 && days >= 0) {
+          days -= 1;
           hours = 23;
         }
       }
