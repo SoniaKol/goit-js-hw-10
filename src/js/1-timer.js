@@ -34,7 +34,7 @@ elements.button.addEventListener('click', clickHandler);
 
 function clickHandler() {
   const userDate = userSelectedDate.getTime();
-  const nowDate = currentDate.getTime();
+  const nowDate = new Date().getTime();
   const diff = userDate - nowDate;
   const dateObj = convertMs(diff);
   startTimmer(dateObj, diff);
