@@ -14,7 +14,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
-    checkDate(userSelectedDate);
+    checkDateOnClose(userSelectedDate);
   },
 };
 
@@ -37,7 +37,10 @@ function clickHandler() {
   const nowDate = new Date().getTime();
   const diff = userDate - nowDate;
   const dateObj = convertMs(diff);
-  startTimmer(dateObj, diff);
+
+  if (checkDateOnClick(diff)) {
+    startTimmer(dateObj, diff);
+  }
 }
 
 function startTimmer(obj, number) {
@@ -75,7 +78,7 @@ function startTimmer(obj, number) {
   }, 1000);
 }
 
-function checkDate(ms) {
+function checkDateOnClose(ms) {
   const diff = ms.getTime() - currentDate.getTime();
   if (diff <= 0) {
     iziToast.show({
@@ -90,6 +93,20 @@ function checkDate(ms) {
   abledBtn(elements.button);
 }
 
+function checkDateOnClick(ms) {
+  if (ms <= 0) {
+    iziToast.show({
+      message: 'Please choose a date in the future',
+      position: 'topRight',
+      messageColor: 'black',
+      color: 'red',
+    });
+    disabledBtn(elements.button);
+    return;
+  }
+  abledBtn(elements.button);
+  return true;
+}
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
