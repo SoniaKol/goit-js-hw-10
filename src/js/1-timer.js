@@ -33,9 +33,11 @@ disabledBtn(elements.button);
 elements.button.addEventListener('click', clickHandler);
 
 function clickHandler() {
-  let value = checkDate(userSelectedDate);
-  let dateObj = convertMs(value);
-  startTimmer(dateObj, value);
+  const userDate = userSelectedDate.getTime();
+  const nowDate = currentDate.getTime();
+  const diff = userDate - nowDate;
+  const dateObj = convertMs(diff);
+  startTimmer(dateObj, diff);
 }
 
 function startTimmer(obj, number) {
@@ -73,10 +75,8 @@ function startTimmer(obj, number) {
   }, 1000);
 }
 
-function checkDate(date) {
-  const userDate = date.getTime();
-  const nowDate = currentDate.getTime();
-  const diff = userDate - nowDate;
+function checkDate(ms) {
+  const diff = ms.getTime() - currentDate.getTime();
   if (diff <= 0) {
     iziToast.show({
       message: 'Please choose a date in the future',
@@ -84,10 +84,10 @@ function checkDate(date) {
       messageColor: 'black',
       color: 'red',
     });
+    disabledBtn(elements.button);
     return;
   }
   abledBtn(elements.button);
-  return diff;
 }
 
 function convertMs(ms) {
