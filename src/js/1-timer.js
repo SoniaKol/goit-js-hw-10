@@ -5,7 +5,6 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 let userSelectedDate = new Date();
-let currentDate = new Date();
 
 const options = {
   enableTime: true,
@@ -79,6 +78,7 @@ function startTimmer(obj, number) {
 }
 
 function checkDateOnClose(ms) {
+  let currentDate = new Date();
   const diff = ms.getTime() - currentDate.getTime();
   if (diff <= 0) {
     iziToast.show({
@@ -90,7 +90,7 @@ function checkDateOnClose(ms) {
     disabledBtn(elements.button);
     return;
   }
-  abledBtn(elements.button);
+  enabledBtn(elements.button);
 }
 
 function checkDateOnClick(ms) {
@@ -104,9 +104,10 @@ function checkDateOnClick(ms) {
     disabledBtn(elements.button);
     return;
   }
-  abledBtn(elements.button);
+  enabledBtn(elements.button);
   return true;
 }
+
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -127,12 +128,12 @@ function disabledBtn(btn) {
   btn.style.color = '#989898';
 }
 
-function abledBtn(btn) {
+function enabledBtn(btn) {
   btn.removeAttribute('disabled');
   btn.style.backgroundColor = '#4e75ff';
   btn.style.color = '#fff';
 }
 
 function disabledInput(input) {
-  input.disabled = 'true';
+  input.disabled = true;
 }
